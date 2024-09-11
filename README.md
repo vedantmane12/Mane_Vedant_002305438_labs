@@ -1,1 +1,1 @@
-# Mane_Vedant_00235438_assignments
+# Mane_Vedant_00235438_labs
