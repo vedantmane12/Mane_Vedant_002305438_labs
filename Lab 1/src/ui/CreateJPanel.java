@@ -4,6 +4,7 @@
  */
 package ui;
 
+import javax.swing.JOptionPane;
 import model.Product;
 
 
@@ -153,7 +154,7 @@ public class CreateJPanel extends javax.swing.JPanel {
         product.setAvailability(avail);
         product.setPrice(price);
         
-        //JOptionPane.showMessageDialog(this, "Product Saved!", "Success", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Product Saved!", "Success", JOptionPane.PLAIN_MESSAGE);
         
         txtName.setText("");
         txtDescription.setText("");
