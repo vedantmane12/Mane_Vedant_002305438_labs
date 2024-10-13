@@ -7,6 +7,7 @@ package ui.supplier;
 import model.Product;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,7 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
     JPanel workArea;
     Product product;
+    ArrayList<Feature> features;
 
     /**
      * Creates new form CreateProductJPanel
@@ -28,12 +30,14 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         initComponents();
         this.workArea = workArea;
         this.product = product;
+        this.features = new ArrayList<Feature>();
 
         txtName.setText(this.product.getName());
         txtId.setText(String.valueOf(this.product.getId()));
         txtPrice.setText(String.valueOf(this.product.getPrice()));
 
         refreshTable();
+        
     }
 
     /**
@@ -227,7 +231,7 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         product.setPrice(Integer.parseInt(txtPrice.getText()));
-        product.setName(txtName.getName());
+        product.setName(txtName.getText());
         
         saveFeatures();
         
@@ -253,6 +257,7 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
             currentFeature.setName(tblFeatures.getValueAt(i, 0).toString());
             currentFeature.setValue(tblFeatures.getValueAt(i, 1));
         }
+                
     }
 
     private void btnAddFeatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFeatureActionPerformed
@@ -261,10 +266,11 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         Feature newFeature = product.addNewFeature();
         newFeature.setName("New Feature");
         newFeature.setValue("Type Value here");
-        
+        features.add(newFeature);
+        product.setFeatures(features);
         saveFeatures();
         refreshTable();
-       
+
     }//GEN-LAST:event_btnAddFeatureActionPerformed
 
     private void btnRemoveFeatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveFeatureActionPerformed
@@ -285,12 +291,13 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tblFeatures.getModel();
         model.setRowCount(0);
-        
-        for (Feature f : product.getFeatures()){
-            Object row[] = new Object[2];
-            row[0] = f;
-            row[1] = f.getValue() == null ? "Empty" : f.getValue().toString();
-            model.addRow(row);
+        if(product.getFeatures() != null){
+            for (Feature f : product.getFeatures()){
+                Object row[] = new Object[2];
+                row[0] = f;
+                row[1] = f.getValue() == null ? "Empty" : f.getValue().toString();
+                model.addRow(row);
+            }
         }
     }
 

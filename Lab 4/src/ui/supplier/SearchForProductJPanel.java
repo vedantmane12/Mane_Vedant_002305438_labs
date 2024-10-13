@@ -8,7 +8,9 @@ package ui.supplier;
 import model.Product;
 import model.Supplier;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.ProductCatalog;
 
 
 
@@ -20,6 +22,7 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
 
    JPanel workArea;
    Supplier supplier;
+   
     
     /** Creates new form CreateProductJPanel */
     public SearchForProductJPanel(JPanel workArea, Supplier supplier) {
@@ -103,8 +106,24 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        
-        
+        ProductCatalog prodCatalog = supplier.getProductCatalog();
+        if(!idField.getText().isBlank()){
+            int selectedProductID = Integer.parseInt(idField.getText());
+            Product foundProduct = prodCatalog.searchProduct(selectedProductID);
+            if(foundProduct != null){
+                
+                ViewProductDetailJPanel vpdjp = new ViewProductDetailJPanel(workArea, foundProduct);
+                workArea.add("ViewProductDetailJPanelSupplier", vpdjp);
+                CardLayout layout = (CardLayout) workArea.getLayout();
+                layout.next(workArea);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Product not found. Please check the details and try again", "Warning", JOptionPane.WARNING_MESSAGE);                
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter product ID to view", "Warning", JOptionPane.WARNING_MESSAGE);            
+        }
+               
 }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
