@@ -9,8 +9,9 @@
  * Created on Oct 1, 2011, 11:55:16 AM
  */
 
-package ui.admin;
+package ui.supplier;
 
+import ui.admin.*;
 import model.Supplier;
 import model.SupplierDirectory;
 import java.awt.CardLayout;
@@ -19,6 +20,7 @@ import java.awt.Image;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -33,21 +35,21 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Rushabh
  */
-public class AddSupplier extends javax.swing.JPanel {
+public class UpdateSupplier extends javax.swing.JPanel {
 
     private JPanel workArea;
-    private SupplierDirectory supplierDirectory;
+    private Supplier supplier;
     
     private final JFileChooser fileChooser = new JFileChooser();
     ImageIcon logoImage;
     
     /** Creates new form AddSupplier */
-    public AddSupplier(JPanel workArea, SupplierDirectory supplierDirectory) {
+    public UpdateSupplier(JPanel workArea, Supplier supplier) {
 
         initComponents();
         this.workArea = workArea;
-        this.supplierDirectory = supplierDirectory;
-        
+        this.supplier = supplier;
+
         FileFilter jpegFilter = new FileNameExtensionFilter("JPEG File", "jpg", "jpeg");
         FileFilter pngFilter = new FileNameExtensionFilter("PNG File", "png", "png");
         
@@ -55,6 +57,12 @@ public class AddSupplier extends javax.swing.JPanel {
         fileChooser.addChoosableFileFilter(pngFilter);
         
         fileChooser.setFileFilter(pngFilter);
+        
+        txtName.setText(supplier.getSupplyName());
+        txtDescription.setText(supplier.getDescription());
+        imgLogo.setIcon(supplier.getLogoImage());
+        
+        
     
     }
 
@@ -70,7 +78,7 @@ public class AddSupplier extends javax.swing.JPanel {
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
-        btnAddSupplier = new javax.swing.JButton();
+        btnUpdateSupplier = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         lblDescription = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -84,12 +92,12 @@ public class AddSupplier extends javax.swing.JPanel {
 
         lblName.setText("Name:");
 
-        lblTitle.setText("New Supplier Information:");
+        lblTitle.setText("Supplier Information:");
 
-        btnAddSupplier.setText("Add");
-        btnAddSupplier.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateSupplier.setText("Update");
+        btnUpdateSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddSupplierActionPerformed(evt);
+                btnUpdateSupplierActionPerformed(evt);
             }
         });
 
@@ -152,14 +160,14 @@ public class AddSupplier extends javax.swing.JPanel {
                                     .addComponent(lblTitle)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(50, 50, 50)
+                                        .addGap(40, 40, 40)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(btnRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(btnAttach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
-                        .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnUpdateSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(423, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,21 +194,22 @@ public class AddSupplier extends javax.swing.JPanel {
                     .addComponent(lblLogo)
                     .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62)
-                .addComponent(btnAddSupplier)
+                .addComponent(btnUpdateSupplier)
                 .addContainerGap(152, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSupplierActionPerformed
+    private void btnUpdateSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSupplierActionPerformed
         // TODO add your handling code here:
-        Supplier supplier = supplierDirectory.addSupplier();
+        
         supplier.setSupplyName(txtName.getText());
         supplier.setDescription(txtDescription.getText());
         supplier.setLogoImage(logoImage);
         
         JOptionPane.showMessageDialog(this, "Supplier successfully added", "Warning", JOptionPane.INFORMATION_MESSAGE);
         backAction();
-    }//GEN-LAST:event_btnAddSupplierActionPerformed
+
+    }//GEN-LAST:event_btnUpdateSupplierActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
@@ -239,19 +248,19 @@ public class AddSupplier extends javax.swing.JPanel {
       
       private void backAction() {
         workArea.remove(this);
-        Component[] componentArray = workArea.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        ManageSuppliers manageSuppliersJPanel = (ManageSuppliers) component;
+        /*Component[] componentArray = workArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];*/
+        ManageSuppliers manageSuppliersJPanel = null;
         manageSuppliersJPanel.refreshTable();
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.previous(workArea);
-    }
+      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JButton btnAddSupplier;
     private javax.swing.JButton btnAttach;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnUpdateSupplier;
     private javax.swing.JLabel imgLogo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDescription;

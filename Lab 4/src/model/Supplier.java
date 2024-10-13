@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 public class Supplier {
     
     private String supplyName;
+    private String description;
     private ProductCatalog productCatalog;
     private ImageIcon logoImage;
 
@@ -29,6 +30,14 @@ public class Supplier {
         productCatalog = new ProductCatalog();
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getSupplyName() {
         return supplyName;
     }
@@ -40,8 +49,7 @@ public class Supplier {
     public ProductCatalog getProductCatalog() {
         return productCatalog;
     }
-    
-    
+        
     @Override
     public String toString() {
         return supplyName;

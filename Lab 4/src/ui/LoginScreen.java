@@ -35,6 +35,7 @@ public class LoginScreen extends javax.swing.JPanel {
         
         populateRoleCombo();
         populateSupplierCombo();
+        
     }
 
     /**

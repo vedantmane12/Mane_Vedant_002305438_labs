@@ -6,6 +6,13 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import model.Supplier;
 import model.SupplierDirectory;
 
@@ -16,6 +23,7 @@ import model.SupplierDirectory;
 public class MainJFrame extends javax.swing.JFrame {
 
     SupplierDirectory supplierDirectory;
+    ImageIcon logoImage;
     
     /**
      * Creates new form MainJFrame
@@ -112,10 +120,23 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainWorkArea;
     // End of variables declaration//GEN-END:variables
 
-    private void populateDemoData(){
+    public void populateDemoData(){
         
         Supplier bestbuy = supplierDirectory.addSupplier();
         bestbuy.setSupplyName("Best Buy");
+        bestbuy.setDescription("Imagine that");
+        try{
+            File file = new File("./src/images/best_buy.jpg");
+            if(file.exists()){
+
+                logoImage = new ImageIcon(file.getAbsolutePath());
+                logoImage = new ImageIcon(logoImage.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+
+                bestbuy.setLogoImage(logoImage);
+            }
+        } catch (Exception ex){
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
