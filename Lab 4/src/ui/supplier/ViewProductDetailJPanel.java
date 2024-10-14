@@ -74,7 +74,7 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         btnAddExistingFeature = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(153, 204, 255));
 
         lblTitle.setText("View Product Details");
 

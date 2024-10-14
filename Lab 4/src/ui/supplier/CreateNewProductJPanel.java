@@ -73,7 +73,7 @@ public class CreateNewProductJPanel extends javax.swing.JPanel {
         btnAttach = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(153, 204, 255));
 
         lblTitle.setText("Create New Product");
 
