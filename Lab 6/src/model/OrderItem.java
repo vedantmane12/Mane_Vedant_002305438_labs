@@ -44,6 +44,10 @@ public class OrderItem {
         this.quantity = quantity;
     }
     
+    @Override
+    public String toString() {
+        return this.product.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
