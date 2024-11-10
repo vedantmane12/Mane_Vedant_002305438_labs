@@ -151,7 +151,7 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        product.setPrice(Integer.parseInt(txtPrice.getText()));
+        product.setPrice(Double.parseDouble(txtPrice.getText()));
         product.setProdName(txtName.getText());
     }//GEN-LAST:event_btnSaveActionPerformed
    
