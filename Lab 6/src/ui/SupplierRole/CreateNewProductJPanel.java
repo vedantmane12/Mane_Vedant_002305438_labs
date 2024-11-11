@@ -37,6 +37,7 @@ public class CreateNewProductJPanel extends javax.swing.JPanel {
         lblProdAvail = new javax.swing.JLabel();
         txtAvailability = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(0, 204, 204));
         setPreferredSize(new java.awt.Dimension(650, 600));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
